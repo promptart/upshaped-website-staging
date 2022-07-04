@@ -29,47 +29,6 @@
 			$body.removeClass('is-preload');
 		}, 100);
 	});
-
-	// Forms.
-
-	// Hack: Activate non-input submits.
-	$('form').on('click', '.submit', function (event) {
-
-		// Stop propagation, default.
-		event.stopPropagation();
-		event.preventDefault();
-
-
-		if (document.getElementById('story')) {
-			// Submit form.
-			// $(this).parents('form').submit();
-
-			// Get story value
-			var story_string = document.getElementById('story').value
-			console.log(story_string)
-
-			const sp1 = document.createElement("div");
-
-			// Give it an id attribute called 'newSpan'
-			sp1.id = "SubmittedStory";
-
-			// Create some content for the new element.
-			const sp1_content = document.createTextNode(story_string);
-
-			// Apply that content to the new element
-			sp1.appendChild(sp1_content);
-
-			// Build a reference to the existing node to be replaced
-			const sp2 = document.getElementById("story");
-			const parentDiv = sp2.parentNode;
-
-			// Replace existing node sp2 with the new span element sp1
-			parentDiv.replaceChild(sp1, sp2);
-
-		}
-
-	});
-
 	// Sidebar.
 	if ($sidebar.length > 0) {
 

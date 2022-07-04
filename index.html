@@ -8,9 +8,13 @@
 	<head>
 		<title>PromptArt.ai</title>
 		<meta charset="utf-8" />
-		<link href='https://fonts.googleapis.com/css?family=Playfair Display' rel='stylesheet'>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@800&family=Epilogue:wght@900&family=Hahmlet&display=swap" rel="stylesheet">
+
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="icon" type="image/png" href="favicon.png">
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -20,10 +24,9 @@
 				<div class="inner">
 					<nav>
 						<ul>
-							<li><a href="#intro">PromptArt.ai</a></li>
-							<li><a href="#one">StoryArt</a></li>
-							<li><a href="#two">The Team</a></li>
-							<li><a href="#three">Get in touch</a></li>
+							<li><a href="#intro">Intro</a></li>
+							<li><a href="#one">The Team</a></li>
+							<li><a href="#two">Get in touch</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -33,87 +36,92 @@
 			<div id="wrapper">
 
 				<!-- Intro -->
-					<section id="intro" class="wrapper style1 fullscreen fade-up">
+					<section id="intro" class="wrapper style1 fullscreen">
 						<div class="inner">
-							<h1>PromptArt.ai</h1>
-							<p>Use the newest AI models to make art corresponding to your story.</p>
-							<ul class="actions">
-								<li><a href="#one" class="button scrolly">Try it out</a></li>
-							</ul>
+							<h1> <span id="Prompt">Prompt</span><span id="Art"><b><i>Art</i></b></span></h1>
+							<p><b>Unleash</b> your <b>creativity</b> with state-of-the-art <b>AI</b></p>
 						</div>
-					</section>
-
-				<!-- Demo -->
-					<section id="one" class="wrapper style1">
-						<div class="inner">
-							<h2>StoryArt Prototype</h2>
-							<p><i>Paste in your story and click 'generate' and the AI will enhance it into a visual novel.</i></p>
-							<div class="split style1">
-								<section>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field">
-												<label for="story">Your Story</label>
-												<textarea name="story" id="story" rows="12"></textarea>
-											</div>
+						<div class="split style2">
+							<section>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field">
+											<label for="story">Prompt</label>
+											<textarea name="story" id="story" rows="3" placeholder="A dog on Times Square"></textarea>
 										</div>
-										<ul class="actions">
-											<li><a href="" class="button submit">Generate</a></li>
-										</ul>
-									</form>
-								</section>
-								<section>
-									<ul class="contact">
-										<li>
-											<a href="#" class="image"><img class="smallimage" src="images/pic01.jpg" alt="" data-position="top center" /></a>
-										</li>
-										<li>
-											<a href="#" class="image"><img class="smallimage" src="images/pic02.jpg" alt="" data-position="top center" /></a>
-										</li>
-										<li>
-											<a href="#" class="image"><img class="smallimage" src="images/pic03.jpg" alt="" data-position="top center" /></a>
-										</li>
+										<div class="field half">
+											<label for="model">Model</label>
+											<select id="model" name="model">
+												<option value="disco diffusion">Disco Diffusion</option>
+												<option value="dall-e">Dall-e</option>
+												<option value="dummy">Dummy</option>
+											  </select>
+										</div>
+										<!-- <div class="field half">
+											<label for="style">Style</label>
+											<select id="style" name="style">
+												<option value="dummy">Oil painting</option>
+												<option value="dall-e">Photorealistic</option>
+												<option value="disco diffusion">Crazy Colorful</option>
+											  </select>
+										</div> -->
+									</div>
+									<ul class="actions">
+										<li><a href="" class="button submit" id="generatebutton">Generate</a></li>
 									</ul>
-								</section>
-							</div>
+								</form>
+							</section>
+							<section id="resultsection">
+								<ul class="results">
+									<li>
+										<img class="bigimage" src="" alt="" data-position="center" id="resultimage" />
+									</li>
+									<li>
+										<p id="resulttext">  </p>
+									</li>
+									<div id="image_div">
+
+									</div>
+								</ul>
+							</section>
 						</div>
 					</section>
 
 				<!-- The Team -->
-					<section id="two" class="wrapper style3 fade-up">
+					<section id="one" class="wrapper style2 fade-up">
 						<div class="inner">
 							<h2>The Team</h2>
-							<p>Four epic AI students</p>
+							<p>Behind every PromptArt is a diverse team:</p>
 							<div class="features">
 								<section>
 									<span class="icon solid major fa-code"></span>
 									<h3>Alfonso Taboada Warmerdam</h3>
-									<p>Technical Engineer from Spain</p>
+									<p>Chief Technical Officer</p>
 								</section>
 								<section>
-									<span class="icon solid major fa-brain"></span>
+									<span class="icon solid major fa-stroopwafel"></span>
 									<h3>Lodewijk Loerakker</h3>
-									<p>Genius, Great guy</p>
+									<p>Chief Executive Officer</p>
 								</section>
 								<section>
-									<span class="icon solid major fa-skull"></span>
+									<span class="icon solid major fa-user-secret"></span>
 									<h3>Lucas Meijer</h3>
-									<p>Hungover</p>
+									<p>Business Advisor</p>
 								</section>
 								<section>
-									<span class="icon solid major fa-clock"></span>
+									<span class="icon solid major fa-dragon"></span>
 									<h3>Lars Buijtelaar</h3>
-									<p>Busy</p>
+									<p>Product Advisor</p>
 								</section>
 							</div>
 							<ul class="actions">
-								<li><a href="" class="button">Get In Contact</a></li>
+								<li><a href="#two" class="button">Get In Contact</a></li>
 							</ul>
 						</div>
 					</section>
 
 				<!-- Get in Touch -->
-					<section id="three" class="wrapper style1 fade-up">
+					<section id="two" class="wrapper style3 fade-up">
 						<div class="inner">
 							<h2>Get in touch</h2>
 							<p>Want to know more? Don't hesitate to send us a message. Note that this form is not functional so use something else.</p>
@@ -164,10 +172,10 @@
 			</div>
 
 		<!-- Footer -->
-			<footer id="footer" class="wrapper style1-alt">
+			<footer id="footer" class="wrapper style4">
 				<div class="inner">
 					<ul class="menu">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy; PromptArt. All rights reserved.</li>
 					</ul>
 				</div>
 			</footer>
@@ -180,6 +188,8 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+			<script src="api_js/storyart.js"></script>
 
 	</body>
 </html>
