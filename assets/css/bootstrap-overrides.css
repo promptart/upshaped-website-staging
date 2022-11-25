@@ -1,0 +1,30 @@
+.masthead {
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 50px 0;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+    background-size: cover;
+}
+
+@media (min-width: 768px) {
+    .masthead {
+        height: 100%;
+        padding: 0;
+    }
+}
+
+body#page-top {
+    /* font-family: "Oswald", Helvetica, Arial, sans-serif!important; */
+    font-family: Montserrat;
+}
+
+h5 {
+    text-transform: none;
+}
+
+h6 {
+    text-transform: none;
+}
