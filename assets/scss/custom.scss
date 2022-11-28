@@ -1,3 +1,5 @@
+// TODO NOT WORKING
+
 // Your variable overrides
 $body-bg: rgb(172, 152, 152);
 $body-color: #111;
@@ -7,5 +9,5 @@ $theme-colors: (
   "danger": #ff4136
 );
 
-@import "node_modules/bootstrap/scss/bootstrap";
 
+@import "node_modules/bootstrap/scss/bootstrap";
