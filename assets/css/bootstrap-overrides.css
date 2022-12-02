@@ -1,25 +1,28 @@
-.masthead {
-    display: table;
-    width: 100%;
-    height: auto;
-    padding: 50px 0;
-    text-align: center;
-    color: #fff;
-    background-color: #000;
-    background-size: cover;
-}
+/* Bootstrap */
 
-@media (min-width: 768px) {
-    .masthead {
-        height: 100%;
-        padding: 0;
-    }
+/* .logo {
+    font-family: "Cabin", "Helvetica Neue", Helvetica,Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
 }
+.logoai {
+    text-transform: lowercase;
+    font-size: 1.5rem;
+} */
 
+/* #mainNav {
+    font-family: "Cabin", "Helvetica Neue", Helvetica,Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+#mainNav .domain {
+    text-transform: lowercase;
+    font-size: 1.5rem;
+} */
 
 /* CHAIR */
 
-.chair {
+/* .chair {
     height: 45%;
 }
 @media (min-width: 768px) {
@@ -29,7 +32,7 @@
 }
 
 body#page-top {
-    /* font-family: "Oswald", Helvetica, Arial, sans-serif!important; */
+    /* font-family: "Oswald", Helvetica, Arial, sans-serif!important;
     font-family: Montserrat;
 }
 
@@ -39,4 +42,4 @@ h5 {
 
 h6 {
     text-transform: none;
-}
+} */

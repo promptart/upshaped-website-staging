@@ -23236,9 +23236,9 @@
     const container = document.createElement("div");
     document.body.appendChild(container);
     camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 20);
-    camera.position.set(-0.75, 0.7, 1.25);
+    camera.position.set(5.5, 0.7, 1.25);
     scene = new Scene();
-    new GLTFLoader().setPath("assets/models/sheenchair/").load("SheenChair.glb", function(gltf) {
+    new GLTFLoader().setPath("assets/models/box/").load("Box.glb", function(gltf) {
       scene.add(gltf.scene);
       const object = gltf.scene.getObjectByName("SheenChair_fabric");
     });

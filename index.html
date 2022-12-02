@@ -5,13 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>UpShaped</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/custom.min.css">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:700&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/Team-icons.css">
     <link rel="stylesheet" href="assets/css/Team-images.css">
+
     <link rel="stylesheet" href="assets/css/bootstrap-overrides.css">
+    
     <link rel="icon" href="assets/img/favicon/favicon-32x32.png"> 
 </head>
 
@@ -19,10 +23,12 @@
 
     <!-- Navigation -->
 
-    <nav class="navbar navbar-light navbar-expand-md fixed-top" id="mainNav">
+    <!-- <nav class="navbar navbar-dark navbar-expand-md fixed-top bg-black" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#">Upshaped.ai</a>
+            <a class="navbar-brand text-white" href="#">UpShaped<span class="text-primary domain">.ai</span></a>
+
             <button data-bs-toggle="collapse" class="navbar-toggler navbar-toggler-right" data-bs-target="#navbarResponsive" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" value="Menu"><i class="fa fa-bars"></i></button>
+            
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item nav-link"><a class="nav-link active" href="#about">Over Ons</a></li>
@@ -31,96 +37,64 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav> -->
     
         <!-- style="background-image:url('assets/img/rotachair.gif'); background-position: center center;background-size: 40%; background-repeat: no-repeat;"> -->
         
     <!-- Landing Page -->
 
-    <section class="masthead"> 
+    <section class="masthead bg-black text-light"> 
         <div class="intro-body">
             <div class="container-fluid vh-100">
-                <div class="row align-items-center justify-content-center h-100 w-100">
-                    <div class="col-md-5 col-xs-12">
-                        <br>
-                        <div class="text-start">
-                            <span class="fs-1"> Meubels zijn niet 2D</span>
-                        </div>
-                        <br>
-                        <div class="text-start">
-                            <span class="fs-5"> <b>UpShaped</b> biedt een virtuele Showroom met een moeiteloze integratie in de huidige webshop.
-                            </span>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="text-center">
-                            <a class="btn btn-outline-primary nav-link p-2 w-50 text-center" href="#about">Ontdek onze Showroom > </a>
+                <!-- Logo -->
+                <div class="row align-items-center justify-content-center w-100 gx-0">
+                    <div class="col-md-12 mt-3">
+                        <div class="text-center logo">
+                            UpShaped<span class="logoai">.ai</span>
                         </div>
                     </div>
+                </div>
 
+                <!-- Introduction -->
+
+                <div class="h-100 w-100 gx-0
+                            row centerifdesktop"> <!-- On mobile, column but on desktop a row-->
                     <!-- Chair -->
-                    <div class="chair col-md-5 col-xs-12">
-                        <iframe class="embed-responsive-item h-100 w-100" src="./showroom.html" allowfullscreen></iframe>
+                    <div class="chair col-sm-12 col-lg-5"> <!-- chair custom css Height 45 on mobile and 100 on desktop -->
+                        <iframe class="embed-responsive-item h-100 w-100" src="/model.html" allowfullscreen></iframe>
+                    </div>
+
+                    <!-- Text -->
+                    <div class="col-sm-12 col-lg-5">
+                        <div class="text-center">
+                            <span class="fs-1 quotefont"> Meubels zijn niet 2D</span>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <span class="fs-5"> <span class="logo">UpShaped</span> biedt virtuele showrooms met een moeiteloze integratie in de huidige webshop.
+                            </span>
+                        </div>
+
+                        <div class="text-center mt-5">
+                            <a class="btn btn-outline-primary nav-link p-2 w-50 text-center m-auto" href="#about">Bekijk een Voorbeeld</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
         <!-- Showcase -->
 
     <!-- <section class="text-left content-section vh-100" id="implementatie"> -->
-    <section class="h-100 overflow-hidden" id="about">
+    <section class="vh-100 overflow-hidden" id="about">
+
         <div class="container-fluid h-100 bg-primary">
-            <div class="row w-100">
-                <div class="text-start ms-5 mt-5 pt-5 mb-3 text-dark">
-                    <span class="fs-1"> De Simpele Implementatie</span>
-                </div>
-            </div>
-            <div class="row align-items-center justify-content-center h-75">
-
-                <!-- Nep website -->
-                <div class="mockwebsite col-8 bg-light text-dark h-100">
-
-                    <div class="row bg-secondary text-secondary"> <!-- Logo -->
-                        Menubalk
-                    </div>
-
-                    <div class="row ms-2 mb-2"> <!-- Logo -->
-                        <span class="fs-2 bg-light text-dark font-italic"> 
-                        <i>UwWebsite</i>
-                        </span>
-                    </div>
-
-
-                    <div class="row h-50 align-items-center justify-content-center "> <!-- Logo -->
-                        
-                        <!-- Chair -->
-                        <div class="col-5 h-100">
-                            <iframe class="embed-responsive-item h-100 w-100" src="/showroom.html" allowfullscreen></iframe>
-                        </div>
-
-                        <div class="col-5">
-                            <div class="text-start">
-                                <span class="fs-1"> Uw Stoel</span>
-                            </div>
-                            <br>
-                            <div class="text-start">
-                                <span class="fs-5"> UpShaped elementen kunnen eenvoudig worden toegevoegd aan bestaande fotoreeksen, hierdoor behoudt de site de vertrouwde stijl maar kunnen klanten toch gebruik maken van de nieuwe interactieve technologie!</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-5 ms-3 me-3 text-muted">
-                        <p class="fs-5 overflow-hidden">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                </div>
-
-
-                <div class="col-3">
-                    <span class="text-dark"> Hier is een voorbeeld te zien van hoe UpShaped elementen eenvoudig passen in elke website. Naast een interactief 3D model komen er binnenkort ook mogelijkheden voor customizatie en AR functionaliteit!</span>
-                </div>
+            <div class="row align-items-center justify-content-center w-100 h-75 gx-0">
+                <iframe class="embed-responsive-item w-100 h-100 mt-5" src="/showroom.html" allowfullscreen></iframe>
             </div>
         </div>
+
     </section>
 
         <!-- Team -->
@@ -254,12 +228,16 @@
             </div>
         </div>
     </section>
-    <section class="text-center content-section" id="contact">
+
+    <!-- Contact -->
+
+    <section class="text-center content-section bg-primary py-4 py-xl-5" id="contact">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-lg-8 mx-auto text-light">
                     <h2>Contact</h2>
-                    <p>Wilt u meer informatie? Neem dan contact met ons op per e-mail. Wij helpen u graag verder. </p> <a href="contact@upshaped.ai">contact@upshaped.ai</a>
+                    <p>Wilt u meer informatie? Neem dan contact met ons op per e-mail. Wij helpen u graag verder. </p>
+                    <a href="contact@upshaped.ai" class="text-light">contact@upshaped.ai</a>
                     <!-- <ul class="list-inline banner-social-buttons">
                         <li class="list-inline-item">&nbsp;<button class="btn btn-primary btn-lg btn-default" type="button"><i class="fa fa-google-plus fa-fw"></i><span class="network-name">&nbsp; Google+</span></button></li>
                         <li class="list-inline-item">&nbsp;<button class="btn btn-primary btn-lg btn-default" type="button"><i class="fa fa-twitter fa-fw"></i><span class="network-name">&nbsp;Twitter</span></button></li>
@@ -269,6 +247,8 @@
             </div>
         </div>
     </section>
+
+
     <!-- <div class="map-clean">
         <div class="container py-4 py-xl-5">
             <div class="row mb-5">
@@ -318,7 +298,8 @@
             <p>Copyright ©&nbsp;Upshaped.ai 2022</p>
         </div>
     </footer> -->
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <!-- <script src="assets/bootstrap/js/bootstrap.min.js"></script> -->
     <script src="assets/js/grayscale.js"></script>
 </body>
 
