@@ -23147,10 +23147,10 @@
       const mainLight = new PointLight(16777215, 5, 28, 2);
       mainLight.position.set(0.418, 16.199, 0.3);
       this.add(mainLight);
-      const room = new Mesh(geometry, roomMaterial);
-      room.position.set(-0.757, 13.219, 0.717);
-      room.scale.set(31.713, 28.305, 28.591);
-      this.add(room);
+      const room2 = new Mesh(geometry, roomMaterial);
+      room2.position.set(-0.757, 13.219, 0.717);
+      room2.scale.set(31.713, 28.305, 28.591);
+      this.add(room2);
       const box1 = new Mesh(geometry, boxMaterial);
       box1.position.set(-10.906, 2.009, 1.846);
       box1.rotation.set(0, -0.195, 0);
@@ -23231,31 +23231,109 @@
   var renderer;
   var controls;
   var object;
+  var room;
+  function randomColor() {
+    changeColor([
+      16777215 * Math.random(),
+      16777215 * Math.random(),
+      16777215 * Math.random(),
+      16777215 * Math.random()
+    ]);
+  }
+  function changeColor(colors) {
+    console.log("DingDong");
+    object.getObjectByName("SheenChair_metal").material.color.set(colors[0]);
+    object.getObjectByName("SheenChair_wood").material.color.set(colors[1]);
+    object.getObjectByName("SheenChair_label").material.color.set(colors[2]);
+    object.getObjectByName("SheenChair_fabric").material.color.set(colors[3]);
+  }
+  function removeEntity(object2) {
+    scene.remove(object2);
+    animate();
+  }
+  function changeRoom(roomName) {
+    console.log("Changing room!");
+    if (room !== null) {
+      console.log("Removed old room!");
+      removeEntity(room);
+    }
+    if (roomName == "bedroom") {
+      new GLTFLoader().setPath("assets/models/crap/").load("modern_bedroom.glb", function(gltf) {
+        room = gltf.scene;
+        room.scale.set(0.75, 0.75, 0.75);
+        room.position.set(-3.5, -0.35, 1.5);
+        scene.add(room);
+      });
+    } else if (roomName == "livingroom") {
+      new GLTFLoader().setPath("assets/models/crap/").load("living_room.glb", function(gltf) {
+        room = gltf.scene;
+        room.scale.set(0.2, 0.2, 0.2);
+        room.position.set(0, -0.2, 1.5);
+        scene.add(room);
+      });
+    } else if (roomName == "lineroom") {
+      const material = new LineBasicMaterial({ color: 16777215 });
+      const points = [];
+      points.push(new Vector3(-5, 2, 2));
+      points.push(new Vector3(-5, 0, 2));
+      points.push(new Vector3(-5, 0, -0.5));
+      points.push(new Vector3(-5, 2, -0.5));
+      points.push(new Vector3(-5, 0, -0.5));
+      points.push(new Vector3(5, 0, -0.5));
+      points.push(new Vector3(5, 2, -0.5));
+      points.push(new Vector3(5, 0, -0.5));
+      points.push(new Vector3(5, 0, 2));
+      points.push(new Vector3(5, 2, 2));
+      points.push(new Vector3(5, 0, 2));
+      points.push(new Vector3(-5, 0, 2));
+      const geometry = new BufferGeometry().setFromPoints(points);
+      room = new Line(geometry, material);
+      scene.add(room);
+    } else if (roomName == "snooker") {
+      new GLTFLoader().setPath("assets/models/crap/").load("snooker.glb", function(gltf) {
+        room = gltf.scene;
+        room.scale.set(0.05, 0.05, 0.05);
+        room.position.set(0, 0.75, 1.5);
+        scene.add(room);
+      });
+    } else if (roomName == "gnome") {
+      new GLTFLoader().setPath("assets/models/crap/").load("gnome.glb", function(gltf) {
+        room = gltf.scene;
+        room.scale.set(1.5, 1.5, 1.5);
+        room.position.set(-5, 2.685, -0.5);
+        scene.add(room);
+      });
+    }
+  }
   init();
   animate();
   function init() {
-    const buttonContainer = document.createElement("div");
-    document.body.appendChild(buttonContainer);
-    const button = document.createElement("button");
-    button.innerHTML = "Pimp This Chair";
-    button.onclick = changeColor;
-    buttonContainer.appendChild(button);
-    const container = document.createElement("div");
-    document.body.appendChild(container);
-    camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 20);
+    renderer = new WebGLRenderer({ antialias: true });
+    var parent = document.getElementById("display");
+    var width = parent.clientWidth;
+    var height = parent.clientHeight;
+    document.getElementById("blue").onclick = () => changeColor([0, 0, 0, 139]);
+    document.getElementById("gold").onclick = () => changeColor([16119260, 16119260, 16119260, 16766720]);
+    document.getElementById("purple").onclick = () => changeColor([9858867, 9858867, 9858867, 7614601]);
+    document.getElementById("random").onclick = randomColor;
+    document.getElementById("room1").onclick = () => changeRoom("bedroom");
+    document.getElementById("room2").onclick = () => changeRoom("livingroom");
+    document.getElementById("room3").onclick = () => changeRoom("lineroom");
+    document.getElementById("room4").onclick = () => changeRoom("snooker");
+    document.getElementById("room5").onclick = () => changeRoom("gnome");
+    camera = new PerspectiveCamera(45, width / height, 0.1, 20);
     camera.position.set(1.5, 0.7, 1.25);
     scene = new Scene();
     new GLTFLoader().setPath("assets/models/sheenchair/").load("SheenChair.glb", function(gltf) {
       object = gltf.scene;
       scene.add(object);
     });
-    renderer = new WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(width, height, false);
     renderer.toneMapping = ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;
     renderer.outputEncoding = sRGBEncoding;
-    container.appendChild(renderer.domElement);
+    parent.appendChild(renderer.domElement);
     const environment = new RoomEnvironment();
     const pmremGenerator = new PMREMGenerator(renderer);
     scene.background = new Color(0);
@@ -23266,7 +23344,7 @@
     controls.minDistance = 1;
     controls.maxDistance = 10;
     controls.target.set(0, 0.35, 0);
-    controls.autoRotate = true;
+    controls.autoRotate = false;
     controls.enableZoom = false;
     controls.update();
     window.addEventListener("resize", onWindowResize);
@@ -23278,7 +23356,7 @@
   function onDocumentKeyDown(event) {
     var keyCode = event.which;
     if (keyCode == 68) {
-      changeColor();
+      randomColor();
     }
     if (keyCode == 87) {
       moveUp();
@@ -23286,14 +23364,6 @@
       moveDown();
     }
     console.log(keyCode);
-  }
-  function changeColor() {
-    console.log("DingDong");
-    object.traverse((child) => {
-      if (child.isMesh) {
-        child.material.color.set(16777215 * Math.random());
-      }
-    });
   }
   function moveUp() {
     object.position.z = object.position.z + 0.1;

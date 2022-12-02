@@ -10795,6 +10795,10 @@ textarea.form-control-lg {
     height: 90%;
   }
 }
+.h-90 {
+  height: 90%;
+}
+
 .centerifdesktop {
   align-items: start;
   justify-content: start;
@@ -10807,6 +10811,27 @@ textarea.form-control-lg {
     justify-content: center;
     flex-flow: row;
   }
+}
+.bigifdesktop {
+  height: 80vh;
+}
+
+.restifdesktop {
+  height: 20vh;
+}
+
+@media (min-width: 768px) {
+  .bigifdesktop {
+    height: 100vh;
+  }
+  .restifdesktop {
+    height: 100vh;
+  }
+}
+.square {
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=custom_bootstrap.css.map */
