@@ -23267,8 +23267,6 @@
     parent = document.getElementById("display");
     width = parent.clientWidth;
     height = parent.clientHeight;
-    document.getElementById("width").innerHTML = width;
-    document.getElementById("height").innerHTML = height;
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     camera = new PerspectiveCamera(45, width / height, 0.1, 20);
@@ -23312,7 +23310,7 @@
       if (room) {
         scene.remove(room);
       }
-      const material = new LineBasicMaterial({ color: 16777215 });
+      const material = new LineBasicMaterial({ color: 0 });
       const points = [];
       points.push(new Vector3(-5, 2, 2));
       points.push(new Vector3(-5, 0, 2));
@@ -23359,6 +23357,7 @@
     new GLTFLoader().setPath("assets/models/sheenchair/").load("SheenChair.glb", function(gltf) {
       object = gltf.scene;
       scene.add(object);
+      onWindowResize();
     });
     renderer.toneMapping = ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;
@@ -23366,7 +23365,7 @@
     parent.appendChild(renderer.domElement);
     const environment = new RoomEnvironment();
     const pmremGenerator = new PMREMGenerator(renderer);
-    scene.background = new Color(0);
+    scene.background = new Color(15392466);
     scene.environment = pmremGenerator.fromScene(environment).texture;
     controls = new OrbitControls(camera, renderer.domElement);
     controls.onMouse;
@@ -23404,9 +23403,6 @@
   function onWindowResize() {
     width = parent.clientWidth;
     height = parent.clientHeight;
-    console.log("on window resize:");
-    document.getElementById("width").innerHTML = width;
-    document.getElementById("height").innerHTML = height;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
