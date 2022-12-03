@@ -23267,6 +23267,13 @@
     parent = document.getElementById("display");
     width = parent.clientWidth;
     height = parent.clientHeight;
+    document.getElementById("width").innerHTML = width;
+    document.getElementById("height").innerHTML = height;
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(width, height);
+    camera = new PerspectiveCamera(45, width / height, 0.1, 20);
+    camera.position.set(1.5, 0.7, 1.25);
+    scene = new Scene();
     document.getElementById("blue").addEventListener("click", function() {
       changeColor([0, 0, 0, 139]);
     });
@@ -23349,15 +23356,10 @@
         room.position.set(-5, 2.685, -0.5);
       });
     });
-    camera = new PerspectiveCamera(45, width / height, 0.1, 20);
-    camera.position.set(1.5, 0.7, 1.25);
-    scene = new Scene();
     new GLTFLoader().setPath("assets/models/sheenchair/").load("SheenChair.glb", function(gltf) {
       object = gltf.scene;
       scene.add(object);
     });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(width, height, false);
     renderer.toneMapping = ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;
     renderer.outputEncoding = sRGBEncoding;
@@ -23400,11 +23402,14 @@
     object.position.z = object.position.z - 0.1;
   }
   function onWindowResize() {
+    width = parent.clientWidth;
+    height = parent.clientHeight;
+    console.log("on window resize:");
+    document.getElementById("width").innerHTML = width;
+    document.getElementById("height").innerHTML = height;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
-    width = parent.clientWidth;
-    height = parent.clientHeight;
   }
   function animate() {
     requestAnimationFrame(animate);
