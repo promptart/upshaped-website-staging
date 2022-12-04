@@ -23231,26 +23231,38 @@
   var renderer;
   var controls;
   var object;
+  var colors;
   var parent;
   var width;
   var height;
   function randomColor() {
-    changeColor([
+    colors = [
       16777215 * Math.random(),
       16777215 * Math.random(),
       16777215 * Math.random(),
       16777215 * Math.random()
-    ]);
+    ];
+    changeColor();
   }
-  function changeColor(colors) {
-    object.getObjectByName("SheenChair_metal").material.color.set(colors[0]);
-    object.getObjectByName("SheenChair_wood").material.color.set(colors[1]);
-    object.getObjectByName("SheenChair_label").material.color.set(colors[2]);
-    object.getObjectByName("SheenChair_fabric").material.color.set(colors[3]);
+  function changeColor() {
+    console.log("DingDong");
+    object.traverse((child) => {
+      if (child.isMesh) {
+        if (child.name.includes("pillow")) {
+          child.material.color.set(colors[0]);
+        } else if (child.name.includes("legs")) {
+          child.material.color.set(colors[1]);
+        } else if (child.name.includes("todo")) {
+          child.material.color.set(colors[2]);
+        } else {
+          child.material.color.set(colors[3]);
+        }
+      }
+    });
   }
   var room = "";
-  function loadShape(filename, onLoaded) {
-    new GLTFLoader().setPath("assets/models/crap/").load(
+  function loadShape(filename, path, onLoaded) {
+    new GLTFLoader().setPath(path).load(
       filename,
       function(gltf) {
         var foundMesh = gltf.scene;
@@ -23270,36 +23282,72 @@
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     camera = new PerspectiveCamera(45, width / height, 0.1, 20);
-    camera.position.set(1.5, 0.7, 1.25);
+    camera.position.set(2.5, 0.7, 2.75);
     scene = new Scene();
+    colors = [7614601, 9858867, 9858867, 9858867];
+    loadShape("2sit.glb", "assets/models/couch/", function(nextObject) {
+      scene.add(nextObject);
+      object = nextObject;
+      changeColor();
+      onWindowResize();
+      document.getElementById("version2").addEventListener("click", function() {
+        if (object) {
+          scene.remove(object);
+        }
+        scene.add(nextObject);
+        object = nextObject;
+        changeColor();
+      });
+    });
+    loadShape("1sit.glb", "assets/models/couch/", function(nextObject) {
+      document.getElementById("version1").addEventListener("click", function() {
+        if (object) {
+          scene.remove(object);
+        }
+        scene.add(nextObject);
+        object = nextObject;
+        changeColor();
+      });
+    });
+    loadShape("3sit.glb", "assets/models/couch/", function(nextObject) {
+      document.getElementById("version3").addEventListener("click", function() {
+        if (object) {
+          scene.remove(object);
+        }
+        scene.add(nextObject);
+        object = nextObject;
+        changeColor();
+      });
+    });
     document.getElementById("blue").addEventListener("click", function() {
-      changeColor([0, 0, 0, 139]);
+      colors = [0, 0, 0, 139];
+      changeColor();
     });
     document.getElementById("gold").addEventListener("click", function() {
-      changeColor([16119260, 16119260, 16119260, 16766720]);
+      colors = [16119260, 16119260, 16119260, 16766720];
+      changeColor();
     });
     document.getElementById("purple").addEventListener("click", function() {
-      changeColor([9858867, 9858867, 9858867, 7614601]);
+      colors = [9858867, 9858867, 9858867, 7614601];
+      changeColor();
     });
     document.getElementById("random").addEventListener("click", randomColor);
-    loadShape("modern_bedroom.glb", function(nextRoom) {
+    loadShape("modern_bedroom.glb", "assets/models/crap/", function(nextRoom) {
       document.getElementById("room1").addEventListener("click", function() {
         if (room) {
           scene.remove(room);
         }
-        console.log(nextRoom);
         scene.add(nextRoom);
         room = nextRoom;
         room.scale.set(0.75, 0.75, 0.75);
         room.position.set(-3.5, -0.35, 1.5);
       });
     });
-    loadShape("living_room.glb", function(nextRoom) {
+    loadShape("living_room.glb", "assets/models/crap/", function(nextRoom) {
       document.getElementById("room2").addEventListener("click", function() {
         if (room) {
           scene.remove(room);
         }
-        console.log(nextRoom);
         scene.add(nextRoom);
         room = nextRoom;
         room.scale.set(0.2, 0.2, 0.2);
@@ -23326,38 +23374,30 @@
       points.push(new Vector3(-5, 0, 2));
       const geometry = new BufferGeometry().setFromPoints(points);
       var nextRoom = new Line(geometry, material);
-      console.log(nextRoom);
       scene.add(nextRoom);
       room = nextRoom;
     });
-    loadShape("snooker.glb", function(nextRoom) {
+    loadShape("snooker.glb", "assets/models/crap/", function(nextRoom) {
       document.getElementById("room4").addEventListener("click", function() {
         if (room) {
           scene.remove(room);
         }
-        console.log(nextRoom);
         scene.add(nextRoom);
         room = nextRoom;
         room.scale.set(0.05, 0.05, 0.05);
         room.position.set(0, 0.75, 1.5);
       });
     });
-    loadShape("gnome.glb", function(nextRoom) {
+    loadShape("gnome.glb", "assets/models/crap/", function(nextRoom) {
       document.getElementById("room5").addEventListener("click", function() {
         if (room) {
           scene.remove(room);
         }
-        console.log(nextRoom);
         scene.add(nextRoom);
         room = nextRoom;
         room.scale.set(1.5, 1.5, 1.5);
-        room.position.set(-5, 2.685, -0.5);
+        room.position.set(-5, 2.755, -0.5);
       });
-    });
-    new GLTFLoader().setPath("assets/models/sheenchair/").load("SheenChair.glb", function(gltf) {
-      object = gltf.scene;
-      scene.add(object);
-      onWindowResize();
     });
     renderer.toneMapping = ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;

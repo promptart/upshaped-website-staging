@@ -10822,15 +10822,15 @@ textarea.form-control-lg {
   }
 }
 .bigifdesktop {
-  height: 70vh;
+  height: 65vh;
 }
 
 .restifdesktop {
-  height: 30vh;
+  height: 35vh;
   padding-left: 0rem;
   padding-right: 0rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 @media (min-width: 768px) {
@@ -10847,7 +10847,7 @@ textarea.form-control-lg {
 }
 .square {
   height: 40px;
-  width: 40px;
+  width: 60px;
   border-radius: 5px;
 }
 
