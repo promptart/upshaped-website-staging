@@ -10785,13 +10785,17 @@ textarea.form-control-lg {
     max-width: 650px !important;
   }
 }
+.partofcarouselbutton {
+  height: 50px !important;
+}
+
 .carousel {
   margin-bottom: 75px;
 }
 
 .carousel-indicators {
   position: absolute !important;
-  bottom: -3rem !important;
+  bottom: -6rem !important;
   overflow: visible;
 }
 
