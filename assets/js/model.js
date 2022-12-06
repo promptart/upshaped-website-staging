@@ -23241,6 +23241,7 @@
     new GLTFLoader().setPath("assets/models/sheenchair/").load("SheenChair.glb", function(gltf) {
       scene.add(gltf.scene);
       const object = gltf.scene.getObjectByName("SheenChair_fabric");
+      onWindowResize();
     });
     renderer = new WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);

@@ -10769,13 +10769,30 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.demoframe {
+  height: 100vw !important;
+  width: 100vw !important;
+  max-height: 650px !important;
+  max-width: 650px !important;
+  background-color: black;
+}
+
+.carousel-indicators {
+  margin-bottom: 65px;
+  position: relative !important;
+}
+
+.carousel-indicators button[data-bs-target] {
+  width: 100px;
+}
+
 .gradient-custom {
   /* fallback for old browsers */
-  background: #667eea;
+  background: #89f7fe;
   /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgba(102, 126, 234, 0.5), rgba(118, 75, 162, 0.5));
+  background: -webkit-linear-gradient(to bottom, rgb(137, 247, 254), rgb(102, 166, 255));
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgba(102, 126, 234, 0.5), rgba(118, 75, 162, 0.5));
+  background: linear-gradient(to bottom, rgb(137, 247, 254), rgb(102, 166, 255));
 }
 
 .logo {
@@ -10844,11 +10861,6 @@ textarea.form-control-lg {
     padding-top: 0rem;
     padding-bottom: 0rem;
   }
-}
-.square {
-  height: 40px;
-  width: 60px;
-  border-radius: 5px;
 }
 
 /*# sourceMappingURL=custom_bootstrap.css.map */

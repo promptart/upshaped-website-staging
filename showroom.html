@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" style="overflow: hidden">
+<html lang="en" style="overflow: hidden;  height: 100%;">
 	<head>
-		<title>three.js webgl - GLTFloader + Sheen</title>
+		<title>UpShaped Showroom</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="stylesheet" href="assets/css/custom_bootstrap.css">
 	</head>
 
-	<body style="overflow: hidden">
+	<body style="overflow: hidden; height: 100%;">
 		<!-- Import maps polyfill -->
 		<!-- Remove this when import maps will be widely supported -->
 		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
@@ -21,81 +21,50 @@
 			}
 		</script>
 
-        <div class="container-fluid gx-0">
-            <div class="h-100 gx-0 gradient-custom
-                        row centerifdesktop">
-                <!-- 3D model -->
-                <div id="display" class="col-sm-12 col-lg-6 bigifdesktop">
-                    <script type="module" src="assets/js/showroom.js"></script>
+        <div class="container-fluid gx-0 h-100 w-100">
+            <!-- 3D model -->
+            <div id="display" class="gx-0 h-100 w-100">
+                <script type="module" src="assets/js/showroom.js"></script>
+            </div>
+
+            <!-- Buttons -->
+            <!-- <div class="gx-0" style="position: absolute; right: 1em; bottom: 1em;">
+                <label class="btn btn-outline-secondary" for="">Verander Achtergrond</label>
+            </div> -->
+
+            <!-- Kleur -->
+            <div class="gx-0" style="position: absolute; left: 1em; bottom: 1em;">
+
+                <!-- Uitvoering -->
+                <!-- <div class="row gx-0 mt-1 ms-1">
+                    <span class="fs-6">
+                        Uitvoering
+                    </span>
                 </div>
-                <!-- Buttons -->
-                <div class="col-sm-12 col-lg-3 d-flex flex-column text-start justify-content-center restifdesktop gx-0 bg-white">
 
-                    <!-- Colors -->
-                    <div class="row gx-0 mt-1 ms-1">
-                        <span class="fs-5">
-                            Kleuren
-                        </span>
-                    </div>
-                    
-                    <div class="row gx-0 mt-0 ms-1 d-flex justify-content-start">
-                        <div class="col">
-                            <button class="btn btn-primary square" style="background:#3e691b" id="random"> </button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary square" style="background:#00008b" id="blue"> </button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary square" style="background:#ffd700" id="gold"> </button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary square" style="background:#743089" id="purple"> </button>
-                        </div>
-                    </div>
+                <div class="btn-group" role="group" aria-label="Version Toggle">
+                    <input type="radio" class="btn-check" name="btnversonradio" id="version1" autocomplete="off">
+                    <label class="btn btn-outline-secondary btn-sm" for="version1">1 zits</label>
+                  
+                    <input type="radio" class="btn-check" name="btnversonradio" id="version2" autocomplete="off" checked>
+                    <label class="btn btn-outline-secondary btn-sm" for="version2">2,5 zits</label>
+                </div> -->
 
-                    <!-- Configuration -->
-                    <div class="row gx-0 mt-3 ms-1">
-                        <span class="fs-5">
-                            Type
-                        </span>
-                    </div>
+                <div class="row gx-0 mt-1 ms-1">
+                    <span class="fs-6">
+                        Kleur
+                    </span>
+                </div>
 
-                    <div class="row gx-0 mt-0 ms-1 d-flex justify-content-start">
-                        <div class="col">
-                            <button class="btn btn-primary square" id="version1">1</button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary square" id="version2">2</button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary square" id="version3">3</button>
-                        </div>
-                    </div>
-
-                    <!-- Rooms -->
-                    <div class="row gx-0 mt-3 ms-1">
-                        <span class="fs-5">
-                            Kamer
-                        </span>
-                    </div>
-
-                    <div class="row gx-0 mt-0 ms-1 d-flex justify-content-start">
-                        <div class="col">
-                            <button class="btn btn-primary square" id="room1">1</button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary square" id="room2">2</button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary square" id="room3">3</button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary square" id="room4">4</button>
-                        </div>
-                        <div class="col">
-                            <button class="btn btn-primary square" id="room5">5</button>
-                        </div>
-                    </div>
+                <div class="btn-group" role="group" aria-label="Color Toggle">
+                    <input type="radio" class="btn-check" name="btncolorradio" id="blue" autocomplete="off" checked>
+                    <label class="btn btn-outline-secondary btn-sm" for="blue">Nougat</label>
+                  
+                    <input type="radio" class="btn-check" name="btncolorradio" id="gold" autocomplete="off">
+                    <label class="btn btn-outline-secondary btn-sm" for="gold">Cognac</label>
+                  
+                    <input type="radio" class="btn-check" name="btncolorradio" id="purple" autocomplete="off">
+                    <label class="btn btn-outline-secondary btn-sm" for="purple">Grijs</label>
                 </div>
             </div>
         </div>

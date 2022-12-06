@@ -23147,10 +23147,10 @@
       const mainLight = new PointLight(16777215, 5, 28, 2);
       mainLight.position.set(0.418, 16.199, 0.3);
       this.add(mainLight);
-      const room2 = new Mesh(geometry, roomMaterial);
-      room2.position.set(-0.757, 13.219, 0.717);
-      room2.scale.set(31.713, 28.305, 28.591);
-      this.add(room2);
+      const room = new Mesh(geometry, roomMaterial);
+      room.position.set(-0.757, 13.219, 0.717);
+      room.scale.set(31.713, 28.305, 28.591);
+      this.add(room);
       const box1 = new Mesh(geometry, boxMaterial);
       box1.position.set(-10.906, 2.009, 1.846);
       box1.rotation.set(0, -0.195, 0);
@@ -23248,19 +23248,13 @@
     console.log("DingDong");
     object.traverse((child) => {
       if (child.isMesh) {
-        if (child.name.includes("pillow")) {
-          child.material.color.set(colors[0]);
-        } else if (child.name.includes("legs")) {
-          child.material.color.set(colors[1]);
-        } else if (child.name.includes("todo")) {
-          child.material.color.set(colors[2]);
+        if (child.name.includes("Base")) {
         } else {
           child.material.color.set(colors[3]);
         }
       }
     });
   }
-  var room = "";
   function loadShape(filename, path, onLoaded) {
     new GLTFLoader().setPath(path).load(
       filename,
@@ -23282,122 +23276,26 @@
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     camera = new PerspectiveCamera(45, width / height, 0.1, 20);
-    camera.position.set(2.5, 0.7, 2.75);
+    camera.position.set(2.75, 1, -2.75);
     scene = new Scene();
-    colors = [7614601, 9858867, 9858867, 9858867];
-    loadShape("2sit.glb", "assets/models/couch/", function(nextObject) {
+    colors = [14401449, 14401449, 14401449, 14401449];
+    loadShape("leather.glb", "assets/models/couch/", function(nextObject) {
       scene.add(nextObject);
       object = nextObject;
       changeColor();
       onWindowResize();
-      document.getElementById("version2").addEventListener("click", function() {
-        if (object) {
-          scene.remove(object);
-        }
-        scene.add(nextObject);
-        object = nextObject;
-        changeColor();
-      });
-    });
-    loadShape("1sit.glb", "assets/models/couch/", function(nextObject) {
-      document.getElementById("version1").addEventListener("click", function() {
-        if (object) {
-          scene.remove(object);
-        }
-        scene.add(nextObject);
-        object = nextObject;
-        changeColor();
-      });
-    });
-    loadShape("3sit.glb", "assets/models/couch/", function(nextObject) {
-      document.getElementById("version3").addEventListener("click", function() {
-        if (object) {
-          scene.remove(object);
-        }
-        scene.add(nextObject);
-        object = nextObject;
-        changeColor();
-      });
     });
     document.getElementById("blue").addEventListener("click", function() {
-      colors = [0, 0, 0, 139];
+      colors = [14401449, 14401449, 14401449, 14401449];
       changeColor();
     });
     document.getElementById("gold").addEventListener("click", function() {
-      colors = [16119260, 16119260, 16119260, 16766720];
+      colors = [10110525, 10110525, 10110525, 10110525];
       changeColor();
     });
     document.getElementById("purple").addEventListener("click", function() {
-      colors = [9858867, 9858867, 9858867, 7614601];
+      colors = [6710903, 6710903, 6710903, 6710903];
       changeColor();
-    });
-    document.getElementById("random").addEventListener("click", randomColor);
-    loadShape("modern_bedroom.glb", "assets/models/crap/", function(nextRoom) {
-      document.getElementById("room1").addEventListener("click", function() {
-        if (room) {
-          scene.remove(room);
-        }
-        scene.add(nextRoom);
-        room = nextRoom;
-        room.scale.set(0.75, 0.75, 0.75);
-        room.position.set(-3.5, -0.35, 1.5);
-      });
-    });
-    loadShape("living_room.glb", "assets/models/crap/", function(nextRoom) {
-      document.getElementById("room2").addEventListener("click", function() {
-        if (room) {
-          scene.remove(room);
-        }
-        scene.add(nextRoom);
-        room = nextRoom;
-        room.scale.set(0.2, 0.2, 0.2);
-        room.position.set(0, -0.2, 1.5);
-      });
-    });
-    document.getElementById("room3").addEventListener("click", function() {
-      if (room) {
-        scene.remove(room);
-      }
-      const material = new LineBasicMaterial({ color: 0 });
-      const points = [];
-      points.push(new Vector3(-5, 2, 2));
-      points.push(new Vector3(-5, 0, 2));
-      points.push(new Vector3(-5, 0, -0.5));
-      points.push(new Vector3(-5, 2, -0.5));
-      points.push(new Vector3(-5, 0, -0.5));
-      points.push(new Vector3(5, 0, -0.5));
-      points.push(new Vector3(5, 2, -0.5));
-      points.push(new Vector3(5, 0, -0.5));
-      points.push(new Vector3(5, 0, 2));
-      points.push(new Vector3(5, 2, 2));
-      points.push(new Vector3(5, 0, 2));
-      points.push(new Vector3(-5, 0, 2));
-      const geometry = new BufferGeometry().setFromPoints(points);
-      var nextRoom = new Line(geometry, material);
-      scene.add(nextRoom);
-      room = nextRoom;
-    });
-    loadShape("snooker.glb", "assets/models/crap/", function(nextRoom) {
-      document.getElementById("room4").addEventListener("click", function() {
-        if (room) {
-          scene.remove(room);
-        }
-        scene.add(nextRoom);
-        room = nextRoom;
-        room.scale.set(0.05, 0.05, 0.05);
-        room.position.set(0, 0.75, 1.5);
-      });
-    });
-    loadShape("gnome.glb", "assets/models/crap/", function(nextRoom) {
-      document.getElementById("room5").addEventListener("click", function() {
-        if (room) {
-          scene.remove(room);
-        }
-        scene.add(nextRoom);
-        room = nextRoom;
-        room.scale.set(1.5, 1.5, 1.5);
-        room.position.set(-5, 2.755, -0.5);
-      });
     });
     renderer.toneMapping = ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;
@@ -23445,6 +23343,8 @@
     height = parent.clientHeight;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
+    console.log(width);
+    console.log(height);
     renderer.setSize(width, height);
   }
   function animate() {
