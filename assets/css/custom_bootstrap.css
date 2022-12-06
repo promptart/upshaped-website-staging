@@ -10772,13 +10772,21 @@ textarea.form-control-lg {
 .demoframe {
   height: 100vw !important;
   width: 100vw !important;
-  max-height: 650px !important;
-  max-width: 650px !important;
+  max-height: 40vh !important;
+  max-width: 40vh !important;
   background-color: black;
 }
 
+@media (min-width: 1024px) {
+  .demoframe {
+    height: 30vw !important;
+    width: 30vw !important;
+    max-height: 650px !important;
+    max-width: 650px !important;
+  }
+}
 .carousel-indicators {
-  margin-bottom: 65px;
+  margin-bottom: 45px;
   position: relative !important;
 }
 
@@ -10816,7 +10824,7 @@ textarea.form-control-lg {
   height: 45%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .chair {
     height: 90%;
   }
@@ -10831,7 +10839,7 @@ textarea.form-control-lg {
   flex-flow: column;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .centerifdesktop {
     align-items: center;
     justify-content: center;
@@ -10850,7 +10858,7 @@ textarea.form-control-lg {
   padding-bottom: 0.5rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .bigifdesktop {
     height: 100vh;
   }
