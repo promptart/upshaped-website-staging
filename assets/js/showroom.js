@@ -22422,9 +22422,6 @@
       materials[1].pbrMetallicRoughness.setBaseColorFactor(colorString);
       materials[2].pbrMetallicRoughness.setBaseColorFactor(colorString);
       materials[3].pbrMetallicRoughness.setBaseColorFactor(colorString);
-      materials[4].pbrMetallicRoughness.setBaseColorFactor(colorString);
-      materials[5].pbrMetallicRoughness.setBaseColorFactor(colorString);
-      materials[6].pbrMetallicRoughness.setBaseColorFactor(colorString);
     }
   }
   modelviewer.addEventListener("load", () => {
