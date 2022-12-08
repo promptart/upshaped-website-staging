@@ -23282,6 +23282,7 @@
     loadShape("leather.glb", "assets/models/couch/", function(nextObject) {
       scene.add(nextObject);
       object = nextObject;
+      object.position.set(-0.25, 0, 0);
       changeColor();
       onWindowResize();
     });
@@ -23303,7 +23304,7 @@
     parent.appendChild(renderer.domElement);
     const environment = new RoomEnvironment();
     const pmremGenerator = new PMREMGenerator(renderer);
-    scene.background = new Color(15392466);
+    scene.background = new Color(15921906);
     scene.environment = pmremGenerator.fromScene(environment).texture;
     controls = new OrbitControls(camera, renderer.domElement);
     controls.onMouse;
