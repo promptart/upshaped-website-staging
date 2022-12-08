@@ -33,13 +33,19 @@
             <model-viewer
                 id="display"
                 class="gx-0 h-100 w-100"
-                camera-orbit="45deg 75deg 6m"
-                alt="UpShaped Display of leather couch"
-                src="assets/models/couch/leather.glb"
+                camera-orbit="45deg 75deg 5.5m"
+                max-camera-orbit="infinity infinity 5.5m"
                 ar
-                poster="assets/img/demo/preview3.jpg" shadow-intensity="1"
+                disable-pan
+                shadow-intensity="1"
                 camera-controls touch-action="pan-y"
+
+                alt="UpShaped Display of leather couch"
+                src="assets/models/couch/leather_midres.glb"
+                poster="assets/img/demo/3dprev.jpg"
             ></model-viewer>
+
+            <script type="module" src="assets/js/showroom.js"></script>
 
             <!-- Buttons -->
             <!-- <div class="gx-0" style="position: absolute; right: 1em; bottom: 1em;">
@@ -66,6 +72,20 @@
 
                 <div class="row gx-0 mt-1 ms-1">
                     <span class="fs-6">
+                        Achtergrond
+                    </span>
+                </div>
+
+                <div class="btn-group" role="group" aria-label="Showroom Toggle" id="showroom-controls">
+                    <input type="radio" class="btn-check" name="btnshowroomradio" id="noroom" autocomplete="off" checked>
+                    <label class="btn btn-outline-secondary btn-sm" for="noroom">Egaal</label>
+                  
+                    <input type="radio" class="btn-check" name="btnshowroomradio" id="yesroom" data-roomname="showroom" autocomplete="off">
+                    <label class="btn btn-outline-secondary btn-sm" for="yesroom">Showroom</label>
+                </div>
+
+                <div class="row gx-0 mt-1 ms-1">
+                    <span class="fs-6">
                         Kleur
                     </span>
                 </div>
@@ -81,35 +101,6 @@
                     <label class="btn btn-outline-secondary btn-sm" for="purple">Grijs</label>
                 </div>
             </div>
-
-            <script>
-                const modelViewerColor = document.querySelector("model-viewer#display");
-    
-                function changeColor(colorString) {
-                    if (colorString) {
-                        console.log(colorString);
-                        const materials = modelViewerColor.model.materials;
-                        // materials[0].pbrMetallicRoughness.setBaseColorFactor(colorString); 0 is the metal
-                        materials[1].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                        materials[2].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                        materials[3].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                        materials[4].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                        materials[5].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                        materials[6].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                    }
-                }
-
-                modelViewerColor.addEventListener('load', () => {
-                    changeColor("#dbbfa9"); // Set default color
-                    console.log("#dbbfa9");
-                });
-                
-                document.querySelector('#color-controls').addEventListener('click', (event) => {
-                    const colorString = event.target.dataset.color;
-
-                    changeColor(colorString);
-                });
-            </script>
 
         </div>
 

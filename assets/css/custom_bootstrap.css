@@ -10774,7 +10774,7 @@ textarea.form-control-lg {
   width: 100vw !important;
   max-height: 40vh !important;
   max-width: 40vh !important;
-  background-color: black;
+  background-color: white;
 }
 
 @media (min-width: 1024px) {

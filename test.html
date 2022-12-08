@@ -19,40 +19,21 @@
 
         <!-- Use it like any other HTML element -->
         <model-viewer
-            id="color"
-            alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
-            src="assets/models/couch/leather.glb"
+            id="display"
+            class="gx-0 h-100 w-100"
+            camera-orbit="45deg 75deg 3.5m"
+            max-camera-orbit="infinity infinity 5.5m"
             ar
-            poster="assets/models/shared-assets/NeilArmstrong.webp" shadow-intensity="1"
+            disable-pan
+            shadow-intensity="1"
             camera-controls touch-action="pan-y"
+
+            alt="UpShaped Display of leather couch"
+            src="assets/models/couch/leather_midres.glb"
+            poster="assets/img/demo/3dprev.jpg"
         ></model-viewer>
 
-        <div class="controls" ,="" id="color-controls">
-            <button data-color="#ff0000">Red</button>
-            <button data-color="#00ff00">Green</button>
-            <button data-color="#0000ff">Blue</button>
-        </div>
-
-        <script>
-            const modelViewerColor = document.querySelector("model-viewer#color");
-
-            console.log("initialize..");
-            
-            document.querySelector('#color-controls').addEventListener('click', (event) => {
-                const colorString = event.target.dataset.color;
-
-                console.log(colorString);
-
-                const materials = modelViewerColor.model.materials;
-                // materials[0].pbrMetallicRoughness.setBaseColorFactor(colorString); 0 is the metal
-                materials[1].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                materials[2].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                materials[3].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                materials[4].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                materials[5].pbrMetallicRoughness.setBaseColorFactor(colorString);
-                materials[6].pbrMetallicRoughness.setBaseColorFactor(colorString);
-            });
-        </script>
+        <script type="module" src="assets/js/test.js"></script>
 
         <!-- environment-image="assets/models/shared-assets/moon_1k.hdr" -->
 	</body>
