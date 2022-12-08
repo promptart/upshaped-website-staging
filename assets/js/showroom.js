@@ -22422,6 +22422,14 @@
       materials[1].pbrMetallicRoughness.setBaseColorFactor(colorString);
       materials[2].pbrMetallicRoughness.setBaseColorFactor(colorString);
       materials[3].pbrMetallicRoughness.setBaseColorFactor(colorString);
+      materials[4].pbrMetallicRoughness.setBaseColorFactor(colorString);
+      materials[5].pbrMetallicRoughness.setBaseColorFactor(colorString);
+      materials[6].pbrMetallicRoughness.setBaseColorFactor(colorString);
+      materials[7].pbrMetallicRoughness.setBaseColorFactor(colorString);
+      materials[8].pbrMetallicRoughness.setBaseColorFactor(colorString);
+      materials[9].pbrMetallicRoughness.setBaseColorFactor(colorString);
+      materials[10].pbrMetallicRoughness.setBaseColorFactor(colorString);
+      materials[11].pbrMetallicRoughness.setBaseColorFactor(colorString);
     }
   }
   modelviewer.addEventListener("load", () => {
