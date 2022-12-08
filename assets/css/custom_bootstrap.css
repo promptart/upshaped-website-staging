@@ -10790,13 +10790,17 @@ textarea.form-control-lg {
 }
 
 .carousel {
-  margin-bottom: 75px;
+  margin-bottom: 100px;
 }
 
 .carousel-indicators {
   position: absolute !important;
   bottom: -6rem !important;
   overflow: visible;
+}
+
+.carousel-indicators [data-bs-target] {
+  text-indent: 0 !important;
 }
 
 .carousel-indicators button[data-bs-target] {

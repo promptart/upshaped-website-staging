@@ -85,7 +85,7 @@
 
 <section class="" id="about">
 
-    <div class="container-fluid bg-white vh-100">
+    <div class="container-fluid bg-white vh-min-100 py-3">
         <div class="h-100 w-100 gx-0
                         row centerifdesktop"> <!-- On mobile, column but on desktop a row-->
 
@@ -111,7 +111,10 @@
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselsliderdemo" class="active img-thumbnail partofcarouselbutton"
                             data-bs-slide-to="0">
-                            <img src="assets/img/demo/preview3.jpg" alt="" class="d-block w-100 border">
+                            <div class="position-relative text-center text">
+                                <img src="assets/img/demo/preview3.jpg" alt="" class="d-block w-100 border">
+                                <img class="position-absolute bottom-0 end-0 me-1 mb-1" src="assets/img/3d-rotation.svg">
+                            </div>
                         </button>
                         <button type="button" data-bs-target="#carouselsliderdemo" class="img-thumbnail partofcarouselbutton" data-bs-slide-to="1">
                             <img src="assets/img/demo/preview2.jpg" alt="" class="d-block w-100 border">
