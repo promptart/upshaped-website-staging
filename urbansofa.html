@@ -57,7 +57,7 @@
 
     <div id="lf">
         <div id="loading"> Loading images... </div>
-        <img id="my-image" src="http://0.0.0.0:8383/assets/videos/images/5-5.jpg" draggable="false"> </img>
+        <img id="my-image" src="assets/videos/images/5-5.jpg" draggable="false"> </img>
     </div>
 
     <div id="description">
@@ -95,7 +95,7 @@
         for(const ringi of Array(numRings).keys()) {
             for(const i of Array(numImages).keys()) {
                 if (ringi >= minRing) {
-                    imageFiles[`${(ringi)}-${(i)}`] = `http://0.0.0.0:8383/assets/videos/images/${(ringi)}-${(i)}.jpg`;
+                    imageFiles[`${(ringi)}-${(i)}`] = `assets/videos/images/${(ringi)}-${(i)}.jpg`;
                 }
             }
         };
@@ -251,8 +251,7 @@
             // Once all the images are loaded, hide the loading text
             loaded = true;
 
-            imageElement.src = images[currentRing+"-"+currentIndex];
-            loadingText.textContent = `${(currentRing)}-${(currentIndex)}`;
+            loadingText.textContent = "Drag the image to interact!";
         });
     </script>
 
