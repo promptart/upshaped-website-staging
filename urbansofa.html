@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Interactive Photos Demo</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      #my-image {
+        height: 810px;
+        width: 540px;
+        cursor: all-scroll;
+        touch-action: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+
+        user-select: none;
+        -webkit-tap-highlight-color:rgba(0,0,0,0);
+
+        display: block;
+        margin: auto;
+      }
+      @media only screen and (max-width: 720px) {
+        #my-image {
+            height: 540px;
+            width: 385px;
+        }
+      }
+
+      #lf {
+        display: block;
+        margin: auto;
+        text-align: center;
+      }
+
+      #description {
+        display: block;
+        margin: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body id="body">
+
+    <div id="lf">
+        <div id="loading"> Loading images... </div>
+        <img id="my-image" src="http://0.0.0.0:8383/assets/videos/images/5-5.jpg" draggable="false"> </img>
+    </div>
+
+    <div id="description">
+        <h1>Upshaped Photos</h1> <br>
+
+        Interactive Content increases user engagement by 50%<sup><a href="https://blog.google/products/shopping/search-on-2022-shopping/">[1]</a></sup> <br>
+
+        Upshaped Photos offers engagement while maintaining 100% photorealism. <br> <br>
+
+        High End stores are able differentiate themselves and show off their quality products. <br> <br>
+
+        This can also be integrated in marketplace apps (Marktplaats.nl/Facebook marketplace) to give the consumer more confidence in their purchase. <br><br>
+
+        Coming Soon: Background Removal (clean) and Background Switching (showcase your couch on the beach!)
+    </div>
+
+    <script>
+        // get the image element
+        const body = document.querySelector('#body');
+        const imageElement = document.querySelector('#my-image');
+        const loadingText = document.querySelector('#loading');
+
+        // add event listener to the 'lf' div
+        const lfDiv = document.querySelector('#lf');
+
+        // images
+
+        // array of image files
+        const numRings = 10;
+        const numImages = 80;
+
+        const minRing = 3;
+
+        const imageFiles = {}
+        for(const ringi of Array(numRings).keys()) {
+            for(const i of Array(numImages).keys()) {
+                if (ringi >= minRing) {
+                    imageFiles[`${(ringi)}-${(i)}`] = `http://0.0.0.0:8383/assets/videos/images/${(ringi)}-${(i)}.jpg`;
+                }
+            }
+        };
+        console.log(imageFiles);
+         // loads into \/
+        const images = {};
+
+
+        // initalize
+        var currentIndex = 5;
+        var currentRing = 5;
+
+        let loaded = false;
+
+
+        // listeners
+        // const lfDiv = document.getElementById("lf");
+        let isDragging = false;
+        let startX;
+        let startY;
+        let startIndex;
+        let startIndexY;
+
+        imageElement.addEventListener("mousedown", (event) => {
+            if (loaded) {
+                isDragging = true;
+
+                startX = event.clientX;
+                startIndex = currentIndex;
+
+                startY = event.clientY;
+                startIndexY = currentRing;
+
+                update();
+            }
+        });
+        imageElement.addEventListener("touchstart", function(event) {
+            if (loaded) {
+                isDragging = true;
+
+                startX = event.touches[0].clientX;
+                startIndex = currentIndex;
+
+                startY = event.touches[0].clientY;
+                startIndexY = currentRing;
+
+                update();
+            }
+        }, false);
+
+
+        imageElement.addEventListener("mousemove", (event) => {
+            if (isDragging) {
+                // horizontal movement
+                let moveX = event.clientX - startX;
+                let moveIdx = (moveX / imageElement.clientWidth) * numImages * 1.5; // 1.5 is added speed
+
+                currentIndex = Math.round((startIndex + moveIdx)) % numImages;
+                if (currentIndex < 0) { // Loop Around
+                    currentIndex = numImages + currentIndex;
+                }
+
+                // vertical movement
+                let moveY = event.clientY - startY;
+                let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2;
+
+                currentRing = Math.round((startIndexY + moveIdxY));
+                if (currentRing < minRing) { // Don't Loop around
+                    currentRing = minRing;
+                }
+                if (currentRing >= numRings) { // Don't Loop around
+                    currentRing = numRings - 1;
+                }
+            }
+        });
+        imageElement.addEventListener("touchmove", function(event) {
+            if (isDragging) {
+                // horizontal movement
+                let moveX = event.touches[0].clientX - startX;
+                let moveIdx = (moveX / imageElement.clientWidth) * numImages; // 1.5 is added speed
+
+                currentIndex = Math.round((startIndex + moveIdx)) % numImages;
+                if (currentIndex < 0) { // Loop Around
+                    currentIndex = numImages + currentIndex;
+                }
+
+                // vertical movement
+                let moveY = event.touches[0].clientY - startY;
+                let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2;
+
+                currentRing = Math.round((startIndexY + moveIdxY));
+                if (currentRing < minRing) { // Don't Loop around
+                    currentRing = minRing;
+                }
+                if (currentRing >= numRings) { // Don't Loop around
+                    currentRing = numRings - 1;
+                }
+            }
+        }, false);
+
+        body.addEventListener("mouseup", (event) => {
+            isDragging = false;
+        });
+        body.addEventListener("touchend", function(event) {
+            isDragging = false;
+        }, false);
+
+        function update() {
+            if (isDragging) {
+                imageElement.src = images[currentRing+"-"+currentIndex];
+                loadingText.textContent = currentRing+"-"+currentIndex;
+                // loadingText.textContent = imageFiles[currentIndex];
+                requestAnimationFrame(update);
+                
+            }
+        }
+
+
+        // LOAD IMAGES
+
+        function loadImages() {
+            return new Promise((resolve, reject) => {
+                // number of images processed
+                let processed = 0;
+
+                for (const [key, imageFile] of Object.entries(imageFiles)) {
+                    fetch(imageFile)
+                        .then((response) => {
+                            if (!response.ok) {
+                                reject(response.statusText);
+                            }
+                            return response.blob();
+                        })
+                        .then((blob) => {
+                            const reader = new FileReader();
+                            reader.readAsDataURL(blob);
+                            reader.onloadend = () => {
+                                images[key] = reader.result;
+
+                                processed++;
+
+                                if (processed === numImages) {
+                                    resolve();
+                                }
+                            };
+                        })
+                        .catch((error) => reject(error));
+                };
+            });
+        }
+
+        loadImages().then(() => {
+            // Once all the images are loaded, hide the loading text
+            loaded = true;
+
+            imageElement.src = images[currentRing+"-"+currentIndex];
+            loadingText.textContent = `${(currentRing)}-${(currentIndex)}`;
+        });
+    </script>
+
+  </body>
+</html>
