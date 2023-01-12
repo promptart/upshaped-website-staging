@@ -15,11 +15,12 @@
       html,
       body {
         height: 100%;
+        background-color: black;
       }
 
       #my-image {
-        height: 540px;
-        width: 360px;
+        height: 520px;
+        width: 960px;
         cursor: all-scroll;
         touch-action: none;
         -webkit-touch-callout: none;
@@ -34,8 +35,8 @@
       }
       @media only screen and (max-width: 720px) {
         #my-image {
-            height: 540px;
-            width: 360px;
+            height: 270px;
+            width: 480px;
         }
       }
 
@@ -45,10 +46,25 @@
         text-align: center;
       }
 
+      .left {
+        text-align: start;
+      }
+      .center {
+        text-align: center;
+      }
+      .right {
+        text-align: end;
+      }
+
       #description {
         display: block;
         margin: auto;
         text-align: center;
+        color: white;
+      }
+
+      #loading {
+        color: white;
       }
     </style>
   </head>
@@ -65,6 +81,7 @@
 
         Interactive Content increases user engagement by 50%<sup><a href="https://blog.google/products/shopping/search-on-2022-shopping/">[1]</a></sup> <br>
 
+        <br>
         Upshaped Photos offers engagement while maintaining 100% photorealism. <br> <br>
 
         High End stores are able differentiate themselves and show off their quality products. <br> <br>
@@ -86,8 +103,8 @@
         // images
 
         // array of image files
-        const numRings = 20;
-        const numImages = 75;
+        const numRings = 18;
+        const numImages = 16 * 4;
 
         const minRing = 0;
 
@@ -147,7 +164,7 @@
         }, false);
 
 
-        imageElement.addEventListener("mousemove", (event) => {
+        body.addEventListener("mousemove", (event) => {
             if (isDragging) {
                 // horizontal movement
                 let moveX = event.clientX - startX;
@@ -171,7 +188,7 @@
                 }
             }
         });
-        imageElement.addEventListener("touchmove", function(event) {
+        body.addEventListener("touchmove", function(event) {
             if (isDragging) {
                 // horizontal movement
                 let moveX = event.touches[0].clientX - startX;
