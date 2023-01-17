@@ -15,11 +15,11 @@
       html,
       body {
         height: 100%;
-        background-color: black;
+        background-color: white;
       }
 
       #my-image {
-        height: 520px;
+        height: 540px;
         width: 960px;
         cursor: all-scroll;
         touch-action: none;
@@ -60,11 +60,11 @@
         display: block;
         margin: auto;
         text-align: center;
-        color: white;
+        color: black;
       }
 
       #loading {
-        color: white;
+        color: black;
       }
     </style>
   </head>
@@ -73,11 +73,11 @@
 
     <div id="lf">
         <div id="loading"> Loading images... </div>
-        <img id="my-image" src="assets/videos/images/5-5.jpg" draggable="false"> </img>
+        <img id="my-image" src="assets/videos/images/10-38.jpg" draggable="false"> </img>
     </div>
 
     <div id="description">
-        <h1>Upshaped Photos</h1> <br>
+        <h2>Upshaped 3D-Photos</h2> <br>
 
         Interactive Content increases user engagement by 50%<sup><a href="https://blog.google/products/shopping/search-on-2022-shopping/">[1]</a></sup> <br>
 
@@ -88,7 +88,7 @@
 
         This can also be integrated in marketplace apps (Marktplaats.nl/Facebook marketplace) to give the consumer more confidence in their purchase. <br><br>
 
-        Coming Soon: Background Removal (clean) and Background Switching (showcase your couch on the beach!)
+        Coming Soon: Background Switching and Smooth Switching
     </div>
 
     <script>
@@ -101,63 +101,78 @@
         const lfDiv = document.querySelector('#lf');
 
         // images
+        // const kdtree = require('kdtree-javascript');
+
+        // var points = {}
+        // var tree;
+        // fetch('assets/videos/images/points.json')
+        // .then(response => response.json())
+        // .then(data => {
+        //     // do something with the data
+        //     var point_Json = JSON.parse(data);
+
+        //     for(const pointi of Array(numPoints).keys()) {
+        //         points[`${(pointi)}`] = point_Json[`${(pointi)}`];
+        //     }
+        //     console.log("Succesfully loaded Points!");
+        //     console.log(point_Json);
+        //     console.log(points);
+        // });
+
 
         // array of image files
-        const numRings = 18;
-        const numImages = 16 * 4;
 
-        const minRing = 0;
+        // SETTINGS (SET MANUALLY TODO AUTO LOAD)
+        const numImagesPerRing = 80
+        const numRings = 15
+        const minRing = 0
 
         const imageFiles = {}
-        for(const ringi of Array(numRings).keys()) {
-            for(const i of Array(numImages).keys()) {
-                if (ringi >= minRing) {
-                    imageFiles[`${(ringi)}-${(i)}`] = `assets/videos/images/${(ringi)}-${(i)}.jpg`;
-                }
+        for(const Xii of Array(numImagesPerRing).keys()) {
+            for(const Yii of Array(numRings).keys()) {
+                    imageFiles[`${Yii}-${Xii}.jpg`] = `assets/videos/images/${Yii}-${Xii}.jpg`;
             }
-        };
+        }
+
         console.log(imageFiles);
          // loads into \/
         const images = {};
 
-
-        // initalize
-        var currentIndex = 5;
-        var currentRing = 5;
+        var X = 39;
+        var Y = 10;
 
         let loaded = false;
-
 
         // listeners
         // const lfDiv = document.getElementById("lf");
         let isDragging = false;
-        let startX;
+        let startX; // mouse location
         let startY;
-        let startIndex;
-        let startIndexY;
+        let startXi; // index that correspondsto the beginning of drag
+        let startYi;
 
         imageElement.addEventListener("mousedown", (event) => {
             if (loaded) {
                 isDragging = true;
 
                 startX = event.clientX;
-                startIndex = currentIndex;
+                startXi = X;
 
                 startY = event.clientY;
-                startIndexY = currentRing;
+                startYi = Y;
 
                 update();
             }
         });
-        imageElement.addEventListener("touchstart", function(event) {
+        imageElement.addEventListener("touchstart", function(event) { // Todo make 1 function for touch and mouse
             if (loaded) {
                 isDragging = true;
 
                 startX = event.touches[0].clientX;
-                startIndex = currentIndex;
+                startXi = X;
 
                 startY = event.touches[0].clientY;
-                startIndexY = currentRing;
+                startYi = Y;
 
                 update();
             }
@@ -168,48 +183,72 @@
             if (isDragging) {
                 // horizontal movement
                 let moveX = event.clientX - startX;
-                let moveIdx = (moveX / imageElement.clientWidth) * numImages * 1.5; // 1.5 is added speed
+                let moveIdx = (moveX / imageElement.clientWidth) * numImagesPerRing * 2; // 1.5 is added speed
 
-                currentIndex = Math.round((startIndex + moveIdx)) % numImages;
-                if (currentIndex < 0) { // Loop Around
-                    currentIndex = numImages + currentIndex;
+                // loop X
+                X = Math.round((startXi + moveIdx)); // % numImagesPerRing;
+                if (X < 0) {
+                    // X = numImagesPerRing + X; // Loop
+                    X = 0;
+                }
+                if (X >= numImagesPerRing - 1) {
+                    X = numImagesPerRing - 1;
                 }
 
                 // vertical movement
                 let moveY = event.clientY - startY;
-                let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2;
+                let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2; // 1.5 is added speed
 
-                currentRing = Math.round((startIndexY + moveIdxY));
-                if (currentRing < minRing) { // Don't Loop around
-                    currentRing = minRing;
+                Y = Math.round(startYi - moveIdxY);
+
+                // loop Y
+                if (Y < minRing) { // Don't Loop around
+                    Y = minRing;
                 }
-                if (currentRing >= numRings) { // Don't Loop around
-                    currentRing = numRings - 1;
+                if (Y >= numRings) { // Don't Loop around
+                    Y = numRings - 1;
                 }
+                update();
+
+                // vertical movement
+                // let moveY = event.clientY - startY;
+                // let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2;
             }
         });
         body.addEventListener("touchmove", function(event) {
             if (isDragging) {
                 // horizontal movement
                 let moveX = event.touches[0].clientX - startX;
-                let moveIdx = (moveX / imageElement.clientWidth) * numImages; // 1.5 is added speed
+                let moveIdx = (moveX / imageElement.clientWidth) * numImagesPerRing * 2; // 1.5 is added speed
 
-                currentIndex = Math.round((startIndex + moveIdx)) % numImages;
-                if (currentIndex < 0) { // Loop Around
-                    currentIndex = numImages + currentIndex;
+                // loop X
+                X = Math.round((startXi + moveIdx)); // % numImagesPerRing;
+                if (X < 0) {
+                    // X = numImagesPerRing + X; // Loop
+                    X = 0;
+                }
+                if (X >= numImagesPerRing - 1) {
+                    X = numImagesPerRing - 1;
                 }
 
                 // vertical movement
                 let moveY = event.touches[0].clientY - startY;
-                let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2;
+                let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2; // 1.5 is added speed
 
-                currentRing = Math.round((startIndexY + moveIdxY));
-                if (currentRing < minRing) { // Don't Loop around
-                    currentRing = minRing;
+                Y = Math.round(startYi - moveIdxY);
+
+                // loop Y
+                if (Y < minRing) { // Don't Loop around
+                    Y = minRing;
                 }
-                if (currentRing >= numRings) { // Don't Loop around
-                    currentRing = numRings - 1;
+                if (Y >= numRings) { // Don't Loop around
+                    Y = numRings - 1;
                 }
+                update();
+
+                // vertical movement
+                // let moveY = event.clientY - startY;
+                // let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2;
             }
         }, false);
 
@@ -220,13 +259,39 @@
             isDragging = false;
         }, false);
 
+        function findNearestPoint(point) {
+            let bestIndex = 0;
+            let bestDistance = 9999;
+
+            for (const [key, element] of Object.entries(points)) {
+                distance = Math.pow(point[0]-element[0], 2) + Math.pow(point[1]-element[1], 2) + Math.pow(point[2]-element[2], 2);
+
+                // console.log(element);
+                if (distance < bestDistance) {
+                    bestIndex = key;
+                    bestDistance = distance;
+                }
+            }
+
+            return bestIndex
+        }
+
         function update() {
             if (isDragging) {
-                imageElement.src = images[currentRing+"-"+currentIndex];
-                loadingText.textContent = currentRing+"-"+currentIndex;
+                // find closest index
+                // let x = Math.sin(-phi);
+                // let y = Math.cos(phi);
+                // let z = Math.cos(theta);
+                // let norm = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))
+                // let point = [x/norm, y/norm, z/norm];
+
+                // let closestPoint = findNearestPoint(point);
+
+                loadingText.textContent = `${Y}-${X}` // phi + "," + theta + " -> " + closestPoint;
+                imageElement.src = images[`${Y}-${X}.jpg`];
+
                 // loadingText.textContent = imageFiles[currentIndex];
-                requestAnimationFrame(update);
-                
+                // requestAnimationFrame(update);
             }
         }
 
@@ -253,8 +318,7 @@
                                 images[key] = reader.result;
 
                                 processed++;
-
-                                if (processed === numImages) {
+                                if (processed === numImagesPerRing * numRings) {
                                     resolve();
                                 }
                             };
