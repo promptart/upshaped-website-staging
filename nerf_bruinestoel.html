@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Interactive Photos Demo</title>
+    <script>
+        // Sets the class of the HTML element using vanilla JavaScript
+        document.documentElement.className += (window.self == window.top ? " top" : " framed");
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        background-color: white;
+      }
+
+      #my-image {
+        /*height: 540px;*/
+        width: 1280px;
+        height: 720px;
+
+        cursor: all-scroll;
+        touch-action: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+
+        user-select: none;
+        -webkit-tap-highlight-color:rgba(0,0,0,0);
+
+        display: block;
+        margin: auto;
+      }
+      /* when in iframe */
+      html.framed #my-image { 
+        width: 100%;
+        height: 100%;
+      }
+      /*@media only screen and (max-width: 720px) {*/
+      /*  #my-image {*/
+      /*      height: 270px;*/
+      /*      width: 480px;*/
+      /*  }*/
+      /*}*/
+
+      #lf {
+        display: block;
+        margin: auto;
+        text-align: center;
+      }
+
+      .left {
+        text-align: start;
+      }
+      .center {
+        text-align: center;
+      }
+      .right {
+        text-align: end;
+      }
+
+      #description {
+        display: block;
+        margin: auto;
+        text-align: center;
+        color: black;
+      }
+
+      #loading {
+        color: black;
+      }
+    </style>
+    <link rel="icon" href="assets/img/favicon/favicon-32x32.png">
+  </head>
+
+  <body id="body">
+
+    <div id="lf">
+        <img id="my-image" src="assets/videos/bruinestoel/7-11.jpg" draggable="false"> </img>
+    </div>
+
+    <script>
+        // get the image element
+        const body = document.querySelector('#body');
+        const imageElement = document.querySelector('#my-image');
+
+        // add event listener to the 'lf' div
+        const lfDiv = document.querySelector('#lf');
+
+        // images
+        // const kdtree = require('kdtree-javascript');
+
+        // var points = {}
+        // var tree;
+        // fetch('assets/videos/images/points.json')
+        // .then(response => response.json())
+        // .then(data => {
+        //     // do something with the data
+        //     var point_Json = JSON.parse(data);
+
+        //     for(const pointi of Array(numPoints).keys()) {
+        //         points[`${(pointi)}`] = point_Json[`${(pointi)}`];
+        //     }
+        //     console.log("Succesfully loaded Points!");
+        //     console.log(point_Json);
+        //     console.log(points);
+        // });
+
+
+        // array of image files
+
+        // SETTINGS (SET MANUALLY TODO AUTO LOAD)
+        const numImagesPerRing = 140
+        const numRings = 20
+        const minRing = 0
+
+        const imageFiles = {}
+        for(const Xii of Array(numImagesPerRing).keys()) {
+            for(const Yii of Array(numRings).keys()) {
+                    imageFiles[`${Yii}-${Xii}.jpg`] = `assets/videos/bruinestoel/${Yii}-${Xii}.jpg`;
+            }
+        }
+
+        // console.log(imageFiles);
+         // loads into \/
+        const images = {};
+
+        var X = 11;
+        var Y = 7;
+
+        let loaded = false;
+
+        // listeners
+        // const lfDiv = document.getElementById("lf");
+        let isDragging = false;
+        let startX; // mouse location
+        let startY;
+        let startXi; // index that correspondsto the beginning of drag
+        let startYi;
+
+        imageElement.addEventListener("mousedown", (event) => {
+            if (loaded) {
+                isDragging = true;
+
+                startX = event.clientX;
+                startXi = X;
+
+                startY = event.clientY;
+                startYi = Y;
+
+                update();
+            }
+        });
+        imageElement.addEventListener("touchstart", function(event) { // Todo make 1 function for touch and mouse
+            if (loaded) {
+                isDragging = true;
+
+                startX = event.touches[0].clientX;
+                startXi = X;
+
+                startY = event.touches[0].clientY;
+                startYi = Y;
+
+                update();
+            }
+        }, false);
+
+
+        body.addEventListener("mousemove", (event) => {
+            if (isDragging) {
+                // horizontal movement
+                let moveX = event.clientX - startX;
+                let moveIdx = (moveX / imageElement.clientWidth) * numImagesPerRing * 2; // 2 is added speed
+
+                // loop X
+                X = Math.round((startXi + moveIdx)) % numImagesPerRing;
+                if (X < 0) {
+                    X = numImagesPerRing + X; // Loop
+                    // X = 0;
+                }
+                // if (X >= numImagesPerRing - 1) {
+                //     X = numImagesPerRing - 1;
+                // }
+
+                // vertical movement
+                let moveY = event.clientY - startY;
+                let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2; // 1.5 is added speed
+
+                Y = Math.round(startYi + moveIdxY);
+                console.log("before");
+                console.log(Y);
+
+                // loop Y
+                if (Y < minRing) { // Don't Loop around
+                    Y = minRing;
+                }
+                if (Y >= numRings) { // Don't Loop around
+                    Y = numRings - 1;
+                }
+                console.log(Y)
+                update();
+
+                // vertical movement
+                // let moveY = event.clientY - startY;
+                // let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2;
+            }
+        });
+        body.addEventListener("touchmove", function(event) {
+            if (isDragging) {
+                // horizontal movement
+                let moveX = event.touches[0].clientX - startX;
+                let moveIdx = (moveX / imageElement.clientWidth) * numImagesPerRing * 2; // 1.5 is added speed
+
+                // loop X
+                X = Math.round((startXi + moveIdx)) % numImagesPerRing;
+                if (X < 0) {
+                    X = numImagesPerRing + X; // Loop
+                    // X = 0;
+                }
+
+                // vertical movement
+                let moveY = event.touches[0].clientY - startY;
+                let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2; // 1.5 is added speed
+
+                Y = Math.round(startYi + moveIdxY);
+
+                // loop Y
+                if (Y < minRing) { // Don't Loop around
+                    Y = minRing;
+                }
+                if (Y >= numRings) { // Don't Loop around
+                    Y = numRings - 1;
+                }
+                update();
+
+                // vertical movement
+                // let moveY = event.clientY - startY;
+                // let moveIdxY = (moveY / imageElement.clientHeight) * numRings * 2;
+            }
+        }, false);
+
+        body.addEventListener("mouseup", (event) => {
+            isDragging = false;
+        });
+        body.addEventListener("touchend", function(event) {
+            isDragging = false;
+        }, false);
+
+        function findNearestPoint(point) {
+            let bestIndex = 0;
+            let bestDistance = 9999;
+
+            for (const [key, element] of Object.entries(points)) {
+                distance = Math.pow(point[0]-element[0], 2) + Math.pow(point[1]-element[1], 2) + Math.pow(point[2]-element[2], 2);
+
+                // console.log(element);
+                if (distance < bestDistance) {
+                    bestIndex = key;
+                    bestDistance = distance;
+                }
+            }
+
+            return bestIndex
+        }
+
+        function update() {
+            if (isDragging) {
+                // find closest index
+                // let x = Math.sin(-phi);
+                // let y = Math.cos(phi);
+                // let z = Math.cos(theta);
+                // let norm = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))
+                // let point = [x/norm, y/norm, z/norm];
+
+                // let closestPoint = findNearestPoint(point);
+
+                imageElement.src = images[`${Y}-${X}.jpg`];
+
+                // requestAnimationFrame(update);
+            }
+        }
+
+
+        // LOAD IMAGES
+
+        function loadImages() {
+            return new Promise((resolve, reject) => {
+                // number of images processed
+                let processed = 0;
+
+                for (const [key, imageFile] of Object.entries(imageFiles)) {
+                    fetch(imageFile)
+                        .then((response) => {
+                            if (!response.ok) {
+                                reject(response.statusText);
+                            }
+                            return response.blob();
+                        })
+                        .then((blob) => {
+                            const reader = new FileReader();
+                            reader.readAsDataURL(blob);
+                            reader.onloadend = () => {
+                                images[key] = reader.result;
+
+                                processed++;
+                                if (processed === numImagesPerRing * numRings) {
+                                    resolve();
+                                }
+                            };
+                        })
+                        .catch((error) => reject(error));
+                };
+            });
+        }
+
+        loadImages().then(() => {
+            // Once all the images are loaded, hide the loading text
+            loaded = true;
+
+        });
+    </script>
+
+  </body>
+</html>
