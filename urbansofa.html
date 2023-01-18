@@ -183,7 +183,7 @@
             if (isDragging) {
                 // horizontal movement
                 let moveX = event.clientX - startX;
-                let moveIdx = (moveX / imageElement.clientWidth) * numImagesPerRing * 2; // 1.5 is added speed
+                let moveIdx = (moveX / imageElement.clientWidth) * numImagesPerRing * 2; // 2 is added speed
 
                 // loop X
                 X = Math.round((startXi + moveIdx)); // % numImagesPerRing;

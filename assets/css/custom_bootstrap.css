@@ -10769,6 +10769,19 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.homepageiframe {
+  width: 90vw;
+  height: 200px;
+  display: block;
+  margin: auto;
+}
+
+@media (min-width: 600px) {
+  .homepageiframe {
+    width: 600px;
+    height: 300px;
+  }
+}
 .demoframe {
   height: 100vw !important;
   width: 100vw !important;
